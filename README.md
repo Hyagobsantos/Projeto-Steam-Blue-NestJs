@@ -1,40 +1,56 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# Nest Movies API
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+[![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/Hyagobsantos/Projeto-Steam-Blue-NestJs)
+[![Lines of Code](https://img.shields.io/tokei/lines/github/Hyagobsantos/Projeto-Steam-Blue-NestJs)](https://img.shields.io/tokei/lines/github/Hyagobsantos/Projeto-Steam-Blue-NestJs)
+[![Repo Size](https://img.shields.io/github/repo-size/Hyagobsantos/Projeto-Steam-Blue-NestJs)](https://img.shields.io/github/repo-size/Hyagobsantos/Projeto-Steam-Blue-NestJs)
+![CodeQL](https://github.com/Hyagobsantos/Projeto-Steam-Blue-NestJs/actions/workflows/codeql-analysis.yml/badge.svg)
 
-## Description
+Uma API construída com NestJS e persistência no PostgreSQL para simular o backend
+da Steam. Ela serve usuários e os jogos que os mesmos salvaram.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Installation
+## Instalação
+Para instalar essa API em seu computador, você vai precisar primeiramente do
+NodeJS e NPM já instalados. 
 
-```bash
-$ npm install
+Agora, clone o projeto em sua máquina. Depois, basta abrir a pasta onde o projeto
+foi clonado e rodar o seguinte comando no terminal para instalar as dependências:
+
 ```
+$ npm i
+```
+
+After installing all dependencies, you must point the API to a database, preferrably MySQL, but you can use other SQL databases too.
+Depois de instalar todas as depedências, você deve apontar a API para um banco 
+de dados, preferencialmente o PostgreSQL, mas você pode usar outros bancos SQL também.
+> 
+
+Copy the file `.env.example` to a new `.env`.
+- Tip: You can do so using the terminal: 
+```
+cp .env.example .env
+```
+
+Then, fill in the spaces left with your credentials as below:
+
+```
+DATABASE_URL= "mysql://user:password@serverAdress:port/db_name"
+```
+
+If you're using PostgreSQL, change the protocol from `mysql://` to `postgresql://`. If you do so, remember to change it too on `./prisma/schema.prisma`
+
+When you're done setting up the `.env` file, run: 
+
+```
+npx prisma migration dev --name init
+```
+
+This will make Prisma create the tables and relationships on your database while also creating the Prisma Client and all the methods necessary to CRUD endpoints.
 
 ## Running the app
 
-```bash
+```
 # development
 $ npm run start
 
@@ -45,29 +61,153 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Test
+## Endpoints
 
-```bash
-# unit tests
-$ npm run test
+### Movies Endpoints
 
-# e2e tests
-$ npm run test:e2e
+```
+##List All @GET
+url/movies/list
 
-# test coverage
-$ npm run test:cov
+##List By ID @GET
+url/movies/list/:id
+```
+```
+##Create @POST
+url/movies/create
+
+#Example:
+{
+  "name": "Dr.Birds Advice for Sad Poets",
+  "img": "https://m.media-amazon.com/images/M/MV5BMGVjZmU2ZTQtNTFhYi00ZjFlLThlYzMtZTA3OTM5Y2UzODBjXkEyXkFqcGdeQXVyMTIzNzM0OTU@._V1_.jpg",
+  "release_date": "2020",
+  "duration": 110
+}
+```
+```
+##Update @PATCH
+url/movies/update/:id
+
+Example:
+{
+  "release_date": "2021"
+}
+
+##Add Genre and/or Staff
+url/movies/addinfo
+
+Example:
+{
+	"movieId": 1,
+	"staffId": [
+		{"id": 22}
+	],
+	"genreId": [
+		{"id": 2},
+		{"id": 3},
+		{"id": 53}
+	]
+}
+```
+```
+##Delete By ID @DELETE
+url/movies/delete/:id
+
+##Delete All @DELETE
+url/movies/delete
+
 ```
 
-## Support
+### Genre Endpoints
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```
+##List All @GET
+url/genre/list
 
-## Stay in touch
+##List By ID @GET
+url/genre/list/:id
+```
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```
+##Create @POST
+url/genre/create
+
+#Example:
+{
+	"name": "Humour"
+}
+```
+
+```
+##Update @PATCH
+url/genre/update/:id
+
+#Example
+{
+	"movieId": 1
+}
+```
+
+```
+##Delete By ID @DELETE
+url/genre/delete/:id
+
+##Delete All @DELETE
+url/genre/delete
+
+```
+
+### Staff Endpoints
+
+```
+##List All @GET
+url/staff/list
+
+##List By ID @GET
+url/staff/list/:id
+```
+
+```
+##Create @POST
+url/staff/create
+
+#Example
+{
+	"name": "James Dooley",
+	"img": "",
+	"birth": "22-08-1976",
+	"staff": "Music Composer"
+}
+```
+
+```
+##Update @PATCH
+url/staff/update/:id
+
+#Example
+{
+	"movieId": 1
+}
+```
+
+```
+##Delete By ID @DELETE
+url/staff/delete/:id
+
+##Delete All @DELETE
+url/staff/delete
+```
+
+You can also find a file named `collection-insomnia.json` which contains the same endpoints ready to import on Insomnia.
+
+## You should know
+This project uses [commitlint](https://github.com/conventional-changelog/commitlint) to enforce a conventional format on all commits. So, if you fork or clone this repo, it will install commitlint as dev dependency too and affect how you create commits, even if it's against your own repo. _You can change this behavior on `package-lock.json`._
+
+## Let's chat!
+- Twitter: [@joaodath](https://twitter.com/joaodath)
+
+- LinkedIn: [João Rodrigues](https://linkedin.com/in/joaodath)
 
 ## License
 
-Nest is [MIT licensed](LICENSE).
+This API is [MPLv2 licensed](LICENSE).
