@@ -61,8 +61,8 @@ export class User extends BaseEntity {
   @JoinTable()
   games: Game[];
 
-  async verificaSenha(senha: string): Promise<boolean> {
-    const hash = await bcrypt.hash(senha, this.salt);
+  async verificaSenha(password: string): Promise<boolean> {
+    const hash = await bcrypt.hash(password, this.salt);
     return hash === this.senha;
   }
 }
