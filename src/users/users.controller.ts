@@ -22,7 +22,7 @@ import { RolesGuard } from '../auth/rules.guard';
 import { Role } from '../auth/role.decorator';
 import { UserRole } from './user-roles.unum';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { User } from './user.entity';
+import { User } from './entities/user.entity';
 import { GetUser } from '../auth/get-decorator';
 import { FindUsersQueryDto } from './dto/find-users-query.dto';
 import { ApiBody } from '@nestjs/swagger';

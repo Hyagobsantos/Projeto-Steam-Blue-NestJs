@@ -12,7 +12,7 @@ import { AuthService } from './auth.service';
 import { CreateUserDto } from '../users/dto/create-user-dto';
 import { CredentialsDto } from '../auth/dto/credentials.dto';
 import { AuthGuard } from '@nestjs/passport';
-import { User } from 'src/users/user.entity';
+import { User } from 'src/users/entities/user.entity';
 import { GetUser } from './get-decorator';
 import { ApiBody } from '@nestjs/swagger';
 
@@ -44,11 +44,10 @@ export class AuthController {
     await this.authService.confirmEmail(token);
     return { message: 'Email confirmado' };
   }
-  
+
   @Get('me')
   @UseGuards(AuthGuard())
   getMe(@GetUser() user: User): User {
     return user;
   }
-
 }

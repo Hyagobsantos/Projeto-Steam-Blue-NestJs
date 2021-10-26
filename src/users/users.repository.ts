@@ -1,5 +1,5 @@
 import { EntityRepository, Repository } from 'typeorm';
-import { User } from './user.entity';
+import { User } from './entities/user.entity';
 import { CreateUserDto } from './dto/create-user-dto';
 import { UserRole } from './user-roles.unum';
 import * as bcrypt from 'bcrypt';

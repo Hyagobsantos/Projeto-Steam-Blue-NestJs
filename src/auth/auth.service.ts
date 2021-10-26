@@ -9,7 +9,7 @@ import {
 import { UserRepository } from 'src/users/users.repository';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateUserDto } from '../users/dto/create-user-dto';
-import { User } from 'src/users/user.entity';
+import { User } from 'src/users/entities/user.entity';
 import { UserRole } from '../users/user-roles.unum';
 import { CredentialsDto } from './dto/credentials.dto';
 import { JwtService } from '@nestjs/jwt';
@@ -58,7 +58,7 @@ export class AuthService {
       { confirmacao_token: null },
     );
 
-    if (result.affected === 0){
+    if (result.affected === 0) {
       throw new HttpException(
         {
           message: HttpStatus.NOT_FOUND,
@@ -68,5 +68,4 @@ export class AuthService {
       );
     }
   }
-
 }

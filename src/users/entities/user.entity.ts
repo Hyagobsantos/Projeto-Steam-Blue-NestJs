@@ -10,7 +10,7 @@ import {
   JoinTable,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
-import { Game } from '../games/entities/game.entity';
+import { Game } from 'src/games/entities/game.entity';
 
 @Entity()
 @Unique(['email'])

@@ -19,7 +19,7 @@ import { Role } from '../auth/role.decorator';
 import { UserRole } from '../users/user-roles.unum';
 import { GamesService } from './games.service';
 import { GetUser } from '../auth/get-decorator';
-import { User } from 'src/users/user.entity';
+import { User } from 'src/users/entities/user.entity';
 import { ApiBody } from '@nestjs/swagger';
 
 @Controller('games')
