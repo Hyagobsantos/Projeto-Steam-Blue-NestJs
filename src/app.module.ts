@@ -4,8 +4,7 @@ import { typeOrmConfig } from './typeorm.config';
 import { UsersModule } from './users/users.module';
 import { GamesModule } from './games/games.module';
 import { AuthModule } from './auth/auth.module';
-import { ConfigModule } from '@nestjs/config';
-import { APP_INTERCEPTOR } from '@nestjs/core';
+
 
 // @Module({
 //   imports: [
@@ -28,6 +27,8 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
   ],
   controllers: [],
 })
+
+
 export class AppModule {}
 function winstonConfig(
   winstonConfig: any,
